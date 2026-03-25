@@ -97,7 +97,7 @@ header {grid-area: cabecalho;}
 
 footer {
     display: grid;
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(255, 255, 255);
     justify-items: center;
     grid-template-columns: 1fr;
     padding-bottom: 1%;

@@ -1,6 +1,6 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0%;
+    margin: 0;
 }
 
 /*---Cabeçalho---*/
@@ -10,7 +10,8 @@ header {
     align-items: center;
     padding: 0 10px;
     box-shadow: 0px 0px 10px black;
-    z-index: 1;
+    position: relative;
+    z-index: 1  ;
 }
 
 nav {
@@ -20,6 +21,7 @@ nav {
 nav ul {
     display: flex;
     list-style: none;
+    padding: 0;
 }
 
 ul a:link,
@@ -38,7 +40,7 @@ ul a:hover {
     color: #0B5CFF;
     border: 2px solid #0B5CFF;
     border-radius: 25px;
-    padding: 5px 30px;
+    padding: 5px 20px;
 }
 
 .botao:hover {
@@ -54,58 +56,118 @@ ul a:hover {
     background: #2d73ff;
 }
 
-/*---Conteúdo---*/
+/*---GRID PRINCIPAL---*/
 
 .conteiner {
-    border: 1px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
         'cabecalho cabecalho'
         'capa capa'
         'org org'
-        'rodape rodape'
-    ;
+        'rodape rodape';
 }
 
-.org-content {grid-area: org;}
-.capa-content {grid-area: capa;}
-footer {grid-area: rodape;}
-header {grid-area: cabecalho;}
+/* AREAS */
 
-.org-content {
-    align-content: stretch;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+header { grid-area: cabecalho; }
+.capa-content { grid-area: capa; }
+.org-content { grid-area: org; }
+footer { grid-area: rodape; }
+
+.capa-img { grid-area: cap-img; }
+.capa-text { grid-area: cap-text; }
+.org-img { grid-area: org-img; }
+.org-text { grid-area: org-text; }
+
+/*---SEÇÕES---*/
 
 .capa-content {
-    align-content: stretch;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'cap-text cap-img';
+    align-items: center;
 }
 
-
-.capa-text, .org-text {
-    padding: 5%;
+.org-content {
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'org-img org-text';
+    align-items: center;
+}
+
+/* IMAGENS */
+
+.capa-img img,
+.org-img img {
+    width: 100%;
+}
+
+/* TEXTOS */
+
+.capa-text,
+.org-text {
+    padding: 5%;
+    display: flex;
     align-items: center;
     font-size: 1.5rem;
 }
 
-/*---rodape---*/
+/*---RODAPÉ---*/
 
 footer {
     display: grid;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(214, 214, 214);
     justify-items: center;
-    grid-template-columns: 1fr;
-    padding-bottom: 1%;
-    grid-template-areas: 
-    'fot-title fot-title'
-    'btn btn'
-    ;
+    padding: 20px;
+    text-align: center;
 }
 
-.fot-btn-dstq{grid-area: btn-dstq;}
-.fot-btn{grid-area: btn;}
+.fot-btn {
+    margin-top: 10px;
+}
+
+/*--RESPONSIVIDADE---*/
+
+@media (max-width: 768px) {
+
+    /* HEADER */
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    header div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* CAPA */
+    .capa-content {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'cap-text'
+            'cap-img';
+    }
+
+    /* ORGANIZAÇÃO */
+    .org-content {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'org-img'
+            'org-text';
+    }
+
+    /* TEXTO */
+    .capa-text,
+    .org-text {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+}
